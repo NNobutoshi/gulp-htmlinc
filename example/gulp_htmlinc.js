@@ -6,28 +6,29 @@
 */
 
 var
-   through  = require('through2')
-  ,fs       = require('fs')
-  ,charset  = 'utf-8'
+   through = require('through2')
+  ,fs      = require('fs')
+  ,charset = 'utf-8'
 ;
 
 module.exports = _init;
 
 function _init( arg ) {
   var
-     dist         = ( arg && arg.dist )? arg.dist: './htdocs'
-    ,escapeRegex  = /([.*+?^=!:${}()|[\]\/\\])/g
-    ,included     = {
-       all   : ''
-      ,start : ''
-      ,end   : ''
-    }
+     dist          = ( arg && arg.dist )? arg.dist: './htdocs'
+    ,escapeRegex   = /([.*+?^=!:${}()|[\]\/\\])/g
+    ,includedFiles = []
   ;
   return through.obj( _transform, _flush );
   function _transform( file, encoding, callback ) {
     var
        store    = []
       ,len      = 0
+      ,included = {
+         all   : ''
+        ,start : ''
+        ,end   : ''
+      }
     ;
     included.all = file._contents + '';
     store = included.all.split('\n');
@@ -40,11 +41,12 @@ function _init( arg ) {
         included.end = item.replace( escapeRegex, '\\$1' );
       }
     } );
-    _eachDir( dist, _write );
+    includedFiles.push( included );
     this.push( file );
     callback();
   }
   function _flush( callback ) {
+    _eachDir( dist, _write );
     callback();
   }
   function _eachDir( path, callback ) {
@@ -71,8 +73,15 @@ function _init( arg ) {
   function _write( file ) {
     var
        contents = fs.readFileSync( file, charset )
-      ,regex    = new RegExp( included.start + '[\\s\\S]*?' + included.end, 'g' )
+      ,newContents = contents
     ;
-    fs.writeFileSync( file, contents.replace( regex, included.all ) );
+    includedFiles.forEach( function( obj ) {
+      var
+         regex = new RegExp( obj.start + '[\\s\\S]*?' + obj.end, 'g' )
+      ;
+      newContents = newContents.replace( regex, obj.all );
+    } )
+    ;
+    fs.writeFileSync( file, newContents );
   }
 }
