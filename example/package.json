@@ -7,16 +7,16 @@
     "gulp": "gulp"
   },
   "author": "",
-  "license": "ISC",
+  "license": "",
   "repository": {
     "type": "git"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-htmlinc": "../",
     "gulp-plumber": "^1.1.0",
     "through2": "^2.0.3"
   },
-  "optionalDependencies": {
-  },
+  "optionalDependencies": {},
   "dependencies": {}
 }

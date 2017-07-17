@@ -33,15 +33,17 @@ function _init( arg ) {
     included.all = file._contents + '';
     store = included.all.split('\n');
     len = store.length;
-    store.forEach( function( item, index ) {
-      if( index === 0 ) {
-        included.start = item.replace( escapeRegex, '\\$1' );
-      }
-      if( index === len - 1 ) {
-        included.end = item.replace( escapeRegex, '\\$1' );
-      }
-    } );
-    includedFiles.push( included );
+    if( len >= 3) {
+      store.forEach( function( item, index ) {
+        if( index === 0 ) {
+          included.start = item.replace( escapeRegex, '\\$1' );
+        }
+        if( index === len - 1 ) {
+          included.end = item.replace( escapeRegex, '\\$1' );
+        }
+      } );
+      includedFiles.push( included );
+    }
     this.push( file );
     callback();
   }

@@ -1,12 +1,12 @@
 var
-   gulp        = require('gulp')
-  ,plumber     = require('gulp-plumber')
-  ,htmlInc     = require('./gulp_htmlinc.js') /* local module */
-  ,dist           = './htdocs'
-  ,src            = './src'
-  ,defaultTasks   = [ 'watch', 'html:inc' ]
-  ,watchTasks     = [ 'html:inc' ]
-  ,watchFiles     = [ src + '/**/*.html' ]
+   gulp    = require('gulp')
+  ,plumber = require('gulp-plumber')
+  ,htmlInc = require('gulp-htmlinc') /* local module */
+  ,dist         = './htdocs'
+  ,src          = './src'
+  ,defaultTasks = [ 'watch', 'html:inc' ]
+  ,watchTasks   = [ 'html:inc' ]
+  ,watchFiles   = [ src + '/**/*.html' ]
 ;
 
 gulp.task( 'html:inc', function() {
