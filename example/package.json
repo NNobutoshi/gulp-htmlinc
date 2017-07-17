@@ -1,0 +1,22 @@
+{
+  "name": "project-example",
+  "version": "1.0.0",
+  "description": "project example",
+  "main": "index.js",
+  "scripts": {
+    "gulp": "gulp"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "through2": "^2.0.3"
+  },
+  "optionalDependencies": {
+  },
+  "dependencies": {}
+}
