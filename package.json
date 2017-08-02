@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/NNobutoshi/gulp-htmlinc"
   },
-  "devDependencies": {
+  "dependencies": {
     "through2": "^2.0.3"
   }
 }

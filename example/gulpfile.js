@@ -19,7 +19,7 @@ gulp.task( 'html:inc', function() {
 ;
 
 gulp.task('watch', function() {
- return gulp.watch( watchFiles, watchTasks );
+ gulp.watch( watchFiles, watchTasks );
 })
 ;
 
